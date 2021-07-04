@@ -11,18 +11,16 @@ def is_valid(queens, board, level):
 
 def solve(queens, board, level):
 	if level == 8:
-		global solutions
-		solutions += 1
-	else:
-		for i in range(8):
-			queens[level] = i
-			if is_valid(queens, board, level):
-				solve(queens, board, level + 1)
+		return 1
+	result = 0
+	for i in range(8):
+		queens[level] = i
+		if is_valid(queens, board, level):
+			result += solve(queens, board, level + 1)
+	return result
 
 
 board = [input() for line in range(8)]
 queens = [-1 for x in range(8)]
-solutions = 0
 
-solve(queens, board, 0)
-print(solutions)
+print(solve(queens, board, 0))
