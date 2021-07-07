@@ -1,41 +1,24 @@
-# t = int(input())
-test_input = open("test_input.txt", "r")
-test_output = open("test_output.txt", "r")
-t = int(test_input.readline())
-print("{} test en cola.".format(t))
-
-
-for i in range(t):
-	# input_str = input().split()
-	# input_str = "90000 90000".split()
-	input_str = test_input.readline().rstrip()
-	ua, ub = input_str.split()
-	ua, ub = int(ua), int(ub)
-	r = False
-	if ub > ua:
-		ua, ub = ub, ua
-	if not ua > 2 * ub:
-		a, b = ua % 3, ub % 3
+def solve(input_str):
+	input_str = input_str.split()
+	pile_a = int(input_str[0])
+	pile_b = int(input_str[1])
+ 
+	if pile_b > pile_a:
+		pile_a, pile_b = pile_b, pile_a
+ 
+	if pile_a <= 2 * pile_b:
+		a = pile_a % 3
+		b = pile_b % 3
 		if b > a:
 			a, b = b, a
-		if a + b == 0:
-			r = True
-		elif a == 2 * b:
-			r = True
-	# if r:
-	# 	print("YES")
-	# else:
-	# 	print("NO")
+ 
+		if (a == b and a == 0) or (a == 2 * b and a != 1):
+			return "YES"
+	return "NO"
 
-	test = test_output.readline().strip()
-	check = True if test == "YES" else False
 
-	if r != check:
-		print("Error en test {} con valores: ua = {} y ub = {}".format(
-			i, ua, ub))
-		print("Línea {} dice {}, pero {} fue el resultado.".format(
-			i, check, r))
+solutions = []
+for i in range(int(input())):
+	solutions.append(solve(input()))
 
-		test_input.close()
-		test_output.close()
-		quit()
+print(*solutions, sep="\n")
