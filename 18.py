@@ -2,19 +2,19 @@ def solve(index):
 	if index < 10:
 	 	return index
 
-	cluster = 10
-	pot = 0
+	sector = 10
+	cluster = 0
 	while True:
-		pot += 1
-		add = cluster + ((10 ** pot) * 9) * (pot + 1)
-		if add > index:
-			pot += 1
+		cluster += 1
+		track = sector + ((10 ** cluster) * 9) * (cluster + 1)
+		if track > index:
+			cluster += 1
 			break
-		cluster = add
+		sector = track
 
-	i = (index - cluster) // pot
-	number = i + 10 ** (pot - 1)
-	module = (index - cluster) % pot
+	i = (index - sector) // cluster
+	number = i + 10 ** (cluster - 1)
+	module = (index - sector) % cluster
 
 	return int(str(number)[module])
 
